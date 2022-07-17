@@ -16,12 +16,10 @@ const NoteId = () => {
     createdAt = format(noteDate, "MMM dd");
   }
   return (
-    <div>
-      <div>
-        <p>title: {currentNote?.title}</p>
-        <p>Body: {currentNote?.body}</p>
-        <p>Created at: {createdAt && createdAt}</p>
-      </div>
+    <div className="lg:px-20">
+      <p>title: {currentNote?.title}</p>
+      <p>Body: {currentNote?.body}</p>
+      <p>Created at: {createdAt && createdAt}</p>
     </div>
   );
 };
