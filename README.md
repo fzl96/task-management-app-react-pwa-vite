@@ -1,3 +1,4 @@
 # task-management-app-react-pwa
 
-# DROPPED BCZ EMOJI-PICKER-REACT DOESNT SUPPORT VITE
+# Dropped bcz emoji-picker-react doesn't support vite
+# Gotta Change repo
