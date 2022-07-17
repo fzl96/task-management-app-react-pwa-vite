@@ -1,26 +1,31 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  Navigate,
-} from "react-router-dom";
-import AddNote from "./components/AddNote";
+import { Routes, Route, Navigate } from "react-router-dom";
 import NoteId from "./pages/app/notes/NoteId";
 import AppLayout from "./components/AppLayout";
 import Main from "./pages/Main";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import NotFound from "./pages/NotFound";
-import type { NoteType } from "./utils/types";
-import { useNotesContext } from "./hooks/UseNotesContext";
 import ProtectedRoutes from "./pages/app/ProtectedRoutes";
 import Notes from "./pages/app/notes/Notes";
+import { ColorSchemeProvider, MantineProvider } from "@mantine/core";
+import { useState } from "react";
+import type { ColorScheme } from "@mantine/core";
 
 function App() {
+  const [colorScheme, setColorScheme] = useState<ColorScheme>("light");
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+
   return (
-    <div>
-      <Router>
+    <ColorSchemeProvider
+      colorScheme={colorScheme}
+      toggleColorScheme={toggleColorScheme}
+    >
+      <MantineProvider
+        theme={{ colorScheme }}
+        withGlobalStyles
+        withNormalizeCSS
+      >
         <Routes>
           <Route element={<ProtectedRoutes />}>
             <Route element={<AppLayout />}>
@@ -32,13 +37,14 @@ function App() {
               <Route path="/app/notes/:id" element={<NoteId />} />
             </Route>
           </Route>
+
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
-      </Router>
-    </div>
+      </MantineProvider>
+    </ColorSchemeProvider>
   );
 }
 

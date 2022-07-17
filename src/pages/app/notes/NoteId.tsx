@@ -5,13 +5,21 @@ import type { NoteType } from "../../../utils/types";
 const NoteId = () => {
   const notes: NoteType[] = useNotesContext();
   const { id } = useParams();
-  const currentNote: NoteType | undefined = notes.find((note: any) => note.id === id)
+  const currentNote: NoteType | undefined = notes.find(
+    (note: NoteType) => note.id === id
+  );
 
   return (
     <div>
-      {currentNote && currentNote.title}
+      {!currentNote ? (
+        <div>
+          <p>No Note Found</p>
+        </div>
+      ) : (
+        <>{currentNote.title}</>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default NoteId
+export default NoteId;
