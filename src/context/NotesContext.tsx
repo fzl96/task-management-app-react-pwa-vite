@@ -10,6 +10,7 @@ import {
   collection,
   query,
   onSnapshot,
+  orderBy,
   // doc,
   // updateDoc,
   // deleteDoc,
@@ -23,7 +24,8 @@ export const NotesContextProvider = ({ children }: any) => {
   const [notes, setNotes] = useState<NoteType[]>([]);
 
   useEffect(() => {
-    const q = query(collection(db, "notes"));
+    const noteRef = collection(db, "notes");
+    const q = query(noteRef, orderBy("createdAt", 'desc'));
     const unsub = onSnapshot(q, (querySnapshot) => {
       let notesArray: any = [];
       querySnapshot.forEach((doc) => {
@@ -33,9 +35,8 @@ export const NotesContextProvider = ({ children }: any) => {
     });
     return () => unsub();
   }, []);
-  
+
   return (
-    <NotesContext.Provider value={ notes }>{children}</NotesContext.Provider>
+    <NotesContext.Provider value={notes}>{children}</NotesContext.Provider>
   );
 };
-

@@ -34,8 +34,8 @@ const Shell: React.FC<Props> = ({ children }) => {
         main: {
           background:
             theme.colorScheme === "dark"
-              ? theme.colors.dark[8]
-              : theme.colors.gray[0],
+              ? theme.colors.dark[7]
+              : "#f4f5f7",
         },
       }}
       navbarOffsetBreakpoint="sm"
@@ -54,7 +54,7 @@ const Shell: React.FC<Props> = ({ children }) => {
             },
           }}
         >
-          <Text>Application navbar</Text>
+          <button onClick={() => toggleColorScheme()}>Tes</button>
         </Navbar>
       }
       header={
@@ -83,7 +83,6 @@ const Shell: React.FC<Props> = ({ children }) => {
         )
       }
     >
-      <Text>Resize app to see responsive navbar in action</Text>
       {children}
     </AppShell>
   );
