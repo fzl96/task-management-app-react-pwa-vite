@@ -4,6 +4,7 @@ import type { NoteType } from "../../../utils/types";
 import { format } from "date-fns";
 
 const NoteId = () => {
+  const tes = 'test';
   const notes: NoteType[] = useNotesContext();
   const { id } = useParams();
   const currentNote: NoteType | undefined = notes.find(
